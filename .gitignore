@@ -29,4 +29,3 @@ hs_err_pid*
 target/generated-sources/
 target/generated-test-sources/
 target/
-!/.idea/
