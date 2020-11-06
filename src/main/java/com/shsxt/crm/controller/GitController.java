@@ -9,5 +9,7 @@ public class GitController {
     @ResponseBody
     public void query(){
         //本地修改
+        //别人修改
     }
+
 }
