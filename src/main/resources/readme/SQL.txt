@@ -1,0 +1,24 @@
+# 所有角色
+select r.id,r.role_name as roleName from t_role r where r.is_valid = 1;
+# 指定用户拥有的角色
+select r1.id,r1.role_name from t_role r1 inner join t_user_role ur on r1.id = ur.role_id where ur.user_id = 10;
+# 合并SQL语句
+select r.id,r.role_name as roleName,temp.id from t_role r left join (select r1.id,r1.role_name from t_role r1 inner join t_user_role ur on r1.id = ur.role_id where ur.user_id = 10) temp on r.id = temp.id ;
+
+# 查询指定用户与角色的关联结果
+select
+    r.id,r.role_name as roleName,
+    case
+        when ifnull(temp.id,0) = 0 then ""
+        else "selected" end
+     as selected
+from
+    t_role r
+        left join
+    (select r1.id,r1.role_name
+     from t_role r1 inner join t_user_role ur
+                               on r1.id = ur.role_id
+     where ur.user_id = 10) temp
+    on r.id = temp.id
+where
+        r.is_valid = 1
